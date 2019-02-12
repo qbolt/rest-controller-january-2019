@@ -23,8 +23,38 @@ namespace rest_controllers_january_2019.Controllers
         [HttpGet]
         public IEnumerable<TodoList> Get()
         {
-            return _todoService.GetAllTodos();
+            return _todoService.GetAllTodoLists();
         }
 
+        [HttpGet("todolist/{id}")]
+        public TodoList GetTodoList(int id)
+        {
+            return _todoService.GetTodoList(id);
+        }
+
+        [HttpPost("todolist")]
+        public TodoList CreateList([FromBody] TodoList todoList)
+        {
+            return _todoService.CreateTodoList(todoList);
+        }
+
+        [HttpPost("todolist/{id}")]
+        public TodoList CreateTodoInList(int id, [FromBody] Todo todo)
+        {
+            return _todoService.CreateTodoInTodoList(id, todo);
+        }
+        
+        [HttpGet("todolist/{id}/completed")]
+        public TodoList GetCompletedTodos(int id)
+        {
+            return _todoService.GetCompletedTodos(id);
+        }
+        
+        [HttpPatch("todolist/{listId}/complete/{todoId}")]
+        public TodoList CompleteTodo(int listId, int todoId)
+        {
+            return _todoService.CompleteTodo(listId, todoId);
+        }
+        
     }
 }

@@ -5,6 +5,11 @@ namespace rest_controllers_january_2019.Services
 {
     public interface ITodoService
     {
-        IEnumerable<TodoList> GetAllTodos();
+        IEnumerable<TodoList> GetAllTodoLists();
+        TodoList GetTodoList(int id);
+        TodoList CreateTodoList(TodoList todoList);
+        TodoList CreateTodoInTodoList(int id, Todo todo);
+        TodoList CompleteTodo(int listId, int todoId);
+        TodoList GetCompletedTodos(int id);
     }
 }
