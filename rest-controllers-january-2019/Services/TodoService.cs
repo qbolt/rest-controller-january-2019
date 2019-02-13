@@ -8,21 +8,21 @@ namespace rest_controllers_january_2019.Services
 {
     public class TodoService : ITodoService
     {
-        private TodoContext _context;
+        private RepositoryContext _context;
 
-        public TodoService(TodoContext context)
+        public TodoService(RepositoryContext context)
         {
-            this._context = context;
+            _context = context;
         }
 
         public IEnumerable<TodoList> GetAllTodoLists()
         {
-            return _context.TodoList.ToList();
+            return _context.TodoList.Include(tl => tl.Todos).ToList();
         }
 
         public TodoList GetTodoList(int id)
         {
-            return _context.TodoList.First(tl => tl.Id == id);
+            return _context.TodoList.Include(tl => tl.Todos).First(tl => tl.Id == id);
         }
 
         public TodoList CreateTodoList(TodoList todoList)

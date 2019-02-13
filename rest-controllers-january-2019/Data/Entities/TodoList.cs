@@ -4,6 +4,7 @@ namespace rest_controllers_january_2019.Data.Entities
 {
     public class TodoList
     {
+
         public int Id { get; set; }
         
         public string ListName { get; set; }

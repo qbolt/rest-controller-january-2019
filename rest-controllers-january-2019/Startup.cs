@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,11 +32,14 @@ namespace rest_controllers_january_2019
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             
+            // Add auto mapper
+            services.AddAutoMapper();
+            
             services.AddEntityFrameworkNpgsql()
-                .AddDbContext<TodoContext>(
+                .AddDbContext<RepositoryContext>(
                     options => options.UseNpgsql(Configuration.GetConnectionString("TodoDatabase")))
                 .BuildServiceProvider();
-
+            
             services.AddScoped<ITodoService, TodoService>();
         }
 
